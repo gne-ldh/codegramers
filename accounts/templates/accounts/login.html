@@ -1,0 +1,46 @@
+{% extends 'accounts/main.html' %}
+{% block body %}
+    <div class="container">
+        <center>
+
+            <br />
+            {% load static %}
+            <img src="{% static 'img/jis.png/' %}" class="d-inline-block align-top mr-2" alt="JIS" width="50"height="50" />
+            <!--<img src="{% static 'img/nit.png/' %}" alt="NiT" width="50" height="40"/>-->
+            <h5 class="text-secondary text-monospace"><span class="text-primary">Log In</span> to NiT Portal</h5>
+            <br />
+
+            {% if error %}
+                <div class="alert alert-danger" style="width: 300px; padding: 2px;">
+                    <h5><span class="text-monospace">☣ERROR☣</span></h5>
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <form method="POST" class="post-form" action="{% url 'login' %}">
+                {% csrf_token %}
+                <p>
+                <input class="form-control" style="width: 300px;" type="text" name="username"  placeholder="ID Card number" required />
+                </p>
+
+                <p>
+                <input class="form-control" style="width: 300px;" type="password" name="password" placeholder="Password" required />
+                </p>
+
+                <input type="hidden" value="{{next}}" name="next" />
+
+                <input class="btn btn-primary btn-sm"  type="submit" value="Login" style="width: 300px;" />
+            </form>
+            <br />
+            <h5>
+                Not yet Registered? <a href="{% url 'signup' %}">Sign up</a>
+            </h5>
+            <h6>
+                <a href="{% url 'reset' %}">
+                    Forgotten your password?
+                </a>
+            </h6>
+        </center>
+    </div> 
+{% endblock %} 
+

@@ -1,0 +1,41 @@
+{% extends 'accounts/main.html' %}
+{% block body %}
+    <div class="container">
+        <center>
+
+            <img src="https://image.flaticon.com/icons/svg/954/954000.svg" height="100px" weight="100px" alt="RESET PASSWORD!"/>
+            <br />
+            <br />
+
+            {% if error %}
+                <div class="alert alert-danger" style="width: 500px; padding:1.5px;">
+                    {{ error }}
+                </div>
+            {% endif %}
+            
+            <form method="POST" action="{% url 'reset' %}">
+                {% csrf_token %}
+                <p>
+                <input type="text" class="form-control" style="width: 300px;" name="id" placeholder="ID Card number" required />
+                </p>
+
+                <p>
+                <input type="email" class="form-control" style="width: 300px;" name="email" placeholder="Registered email" required />
+                </p>
+                
+                <p>
+                <input type="password" class="form-control" style="width: 300px;" name="password1" placeholder="New Password" required />
+                </p>
+
+                <p>
+                <input type="password" class="form-control" style="width: 300px;" name="password2" placeholder="Confirm Password" required />
+                </p>
+                
+                <p>
+                <input class="btn btn-primary" type="submit" value="Reset Password" />
+                </p>
+            </form>
+            <br />
+        </center>
+    </div>
+{% endblock %}
